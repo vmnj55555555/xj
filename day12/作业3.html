@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--3. 实现拖拽一个图片，并限制其移动范围不超过屏幕可视区域-->
+		<style type="text/css">
+			*{margin: 0;
+				padding: 0;
+			}
+			div{width: 240px;
+				height: 180px;
+				background: url(22.gif);
+				border: 1px solid slateblue;
+				cursor: pointer;
+				position: absolute;
+			}
+			
+		</style>
+	</head>
+	
+	<body>
+		<div>
+			<input type="button" id="btn" value="路径回放" />
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var odiv=document.getElementsByTagName("div")[0];
+		odiv.flag=false;
+		odiv.onmousedown=function(evt){
+			evt=evt||window.event;
+			odiv.flag=true;
+			odiv.offx=evt.offsetX;
+			odiv.offy=evt.offsetY;
+		}
+		odiv.onmousemove=function(evt){
+			evt=evt||window.event;
+			if(odiv.flag){
+				var left=evt.clientX-odiv.offx;
+				var top=evt.clientY-odiv.offy;
+				var maxleft=document.documentElement.clientWidth-odiv.offsetWidth;
+				var maxtop=document.documentElement.clientHeight-odiv.offsetHeight;
+				
+				if(left<0){
+					left=0;
+				}
+				if(top<0){
+					top=0;
+				}
+				if(left>=maxleft){
+					left=maxleft;
+				}
+				if(top>=maxtop){
+					top=maxtop;
+				}
+				odiv.style.left=left+"px";
+				odiv.style.top=top+"px";
+			}
+		}
+		document.onmouseup=function(){
+			odiv.flag=false;
+		}
+	</script>
+</html>

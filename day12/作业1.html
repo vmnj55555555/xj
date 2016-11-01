@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--
+		1. 实现可拖拽的图片
+		2. 右键弹出一个自定义的菜单，模仿windows右键菜单
+		3. 实现拖拽一个图片，并限制其移动范围不超过屏幕可视区域
+		4. 输入两个字符串S1，S2，长度不超过120，把这两个字符串合并成一
+		个串S，规则如下：如果S1串长度大于S2串的长度，即S1串的第一个字
+		符在前面，后跟S2串的第一个字符，如此重复到最后，反之，则把S2串
+		的第一个字符放前面，后接S1串的第一个字符，一直得重复到结束。
+		比如：输入为两行，分别为两个字符串，如：abcd 12345
+		输出为一行，为合并后的字符串，如上例为：1a2b3c4d5
+		-->
+		
+		<!--1. 实现可拖拽的图片-->
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			div{width: 240px;
+				height: 180px;
+				background: url(22.gif);
+				border: 1px solid #FA8072;
+				cursor: pointer;
+				position: absolute;
+			}
+		</style>	
+	</head>
+	<body>
+		<div>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var odiv=document.getElementsByTagName("div")[0];
+		var flag=false;
+		odiv.onmousedown=function(evt){
+			evt=evt||window.event;
+			flag=true;
+			odiv.offx=evt.offsetX;
+			odiv.offy=evt.offsetY;
+		}
+		odiv.onmousemove=function(evt){
+			evt=evt||window.event;
+			if(flag){
+				odiv.style.left=evt.clientX-odiv.offx+"px";
+				odiv.style.top=evt.clientY-odiv.offy+"px";
+			}
+		}
+		document.onmouseup=function(){
+			flag=false;
+		}
+	</script>
+</html>

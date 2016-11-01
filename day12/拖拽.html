@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			div{width: 240px;
+				height: 180px;
+				background: #DDDDEE;
+				border: 1px solid salmon;
+				cursor: pointer;
+				position: absolute;}
+		</style>
+	</head>
+	<body>
+		<div></div>
+	</body>
+	
+	<script type="text/javascript">
+		var niao=document.getElementsByTagName("div")[0];
+		var flag=false;
+		niao.onmousedown=function(evt){
+			evt=evt||window.event;
+			flag=true;
+			niao.offx=evt.offsetX;
+			niao.offy=evt.offsetY;
+		}
+		niao.onmousemove=function(evt){
+			evt=evt||window.event;
+			if(flag){
+				niao.style.left=evt.clientX-niao.offx+"px";
+				niao.style.top=evt.clientY-niao.offy+"px";
+			}
+		}
+		document.onmouseup=function(){
+			flag=false;
+		}
+	</script>
+</html>
